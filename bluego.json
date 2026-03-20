@@ -1,0 +1,28 @@
+{
+  "_comment": "bluego.ai deployment configuration for Paperclip on-droplet",
+  "openclaw": {
+    "adapter": "openclaw-gateway",
+    "fork": "https://github.com/bluego-ai/openclaw-fork",
+    "branch": "bluego",
+    "gatewayProtocol": "ws",
+    "agents": {
+      "_comment": "Each agent runs on its own port. Populated by paperclip-sidecar on agent provisioning.",
+      "defaultBasePort": 18789,
+      "portIncrement": 1
+    },
+    "adapterConfig": {
+      "_comment": "These values are injected per-agent by the paperclip-sidecar bootstrap flow",
+      "url": "ws://localhost:{port}",
+      "token": "{gatewayToken}",
+      "sessionKeyStrategy": "issue",
+      "disableDeviceAuth": false,
+      "timeoutSec": 120
+    }
+  },
+  "deployment": {
+    "dataDir": "/opt/openclaw/paperclip/data",
+    "secretsDir": "/opt/openclaw/paperclip/secrets",
+    "port": 3000,
+    "bootstrap": "/opt/openclaw/bootstrap-company.sh"
+  }
+}
